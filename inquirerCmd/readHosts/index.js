@@ -74,9 +74,14 @@ async function readHostConfigDir() {
 }
 
 async function readCurHosts() {
-    const hosts = await getCurHosts();
-    console.log("✅ ~ zhuling hosts:", hosts)
+    let hosts = ''
+    await getCurHosts().then(res=>{
+        hosts = res;
+    });
+    console.log("✅ ~ zhuling hosts:", hosts);
+    return hosts;
 }
 
 exports.readHosts = readHosts;
+exports.readCurHosts = readCurHosts;
 exports.readDefaultHosts = readDefaultHosts;

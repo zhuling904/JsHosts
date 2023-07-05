@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const path = require('path');
 const { choicesInputMethod } = require('../../utils');
-const { addConfigFile } = require('../addConfigFile');
+const { addConfigFile, addToHosts } = require('../addConfigFile');
 const regex = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+([a-zA-Z0-9.-]+)$/;
 async function addHosts() {
     inquirer
@@ -26,7 +26,7 @@ async function addHosts() {
                 case '2.增加配置文件':
                     addConfigFile(); break;
                 case '3.hosts文件中追加hosts':
-                    console.log('这是一个介绍3'); break;
+                    addToHosts(); break;
             }
         }).catch((error) => {
             console.error('出错啦！', error);
