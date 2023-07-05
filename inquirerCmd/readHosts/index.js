@@ -79,3 +79,4 @@ async function readCurHosts() {
 }
 
 exports.readHosts = readHosts;
+exports.readDefaultHosts = readDefaultHosts;
