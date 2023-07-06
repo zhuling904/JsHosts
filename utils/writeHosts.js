@@ -5,19 +5,11 @@ const COMMENT_START = '#---ZHULING HOSTS START---';
 const COMMENT_END = '#---ZHULING HOSTS END---';
 const HOSTS_PATH = '/etc/hosts'
 async function writeHosts(content, isAppendFile = false, isClear = false) {
-    fs.chmod('/etc/hosts', '777', (err) => {
-        if (err) {
-          console.error('无法更改文件权限：', err);
-          return;
-        }
-        // console.log('文件权限已成功更改。');
-    });
-
+    await chomodHosts();
+    // 已经添加过了，并且是追加hosts
     // 先判断是否有预设注释
     const curHosts = await readCurHosts();
     let writeContent = '';
-
-    // 已经添加过了，并且是追加hosts
     if (curHosts.includes(COMMENT_START)) {
         // 将内容拆分为三部分
         const section = curHosts.split(COMMENT_START);
@@ -37,11 +29,24 @@ async function writeHosts(content, isAppendFile = false, isClear = false) {
     }
     fs.writeFile(HOSTS_PATH, writeContent, async (err) => {
         if (err) throw err;
+        console.log('修改成功');
         await switchWifi();
     })
     if(!content) {
         await switchWifi();
     }
+}
+
+async function chomodHosts() {
+    return new Promise((resolve, reject) => {
+        fs.chmod('/etc/hosts', '777', async (err) => {
+            if (err) {
+              console.error('无法更改文件权限：', err);
+              reject(err)
+            }
+            resolve('文件权限已成功更改。')
+        });
+    })
 }
 
 exports.writeHosts = writeHosts;

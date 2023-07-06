@@ -22,7 +22,7 @@ async function switchHostsFile() {
         .then(async (answers) => {
             const { selectName } = answers;
             const fileContent = await getConfileContent(selectName);
-            writeHosts(fileContent, false, false);
+            await writeHosts(fileContent, false, false);
         }).catch((error) => {
             console.error('出错啦！', error);
         });
