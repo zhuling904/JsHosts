@@ -5,6 +5,7 @@ const { choicesInputMethod } = require('../../utils');
 const { readDefaultHosts, readCurHosts } = require('../readHosts');
 const { getDefaultHosts } = require('../../utils/getDefaultHosts');
 const { getInputFileName } = require('../getInputFileName');
+const { writeHosts } = require('../../utils/writeHosts');
 const regex = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+([a-zA-Z0-9.-]+)$/;
 const PAGESIZE = 99;
 const COMMENT_START = '#---ZHULING HOSTS START---';
@@ -30,10 +31,8 @@ async function addToHosts() {
         return;
     } else {
         // 写入hosts
-        let writeContent = `${COMMENT_START}\n${selectName}\n${COMMENT_END}`
-        fs.appendFile('/etc/hosts', writeContent ,(err) => {
-            if (err) throw err;
-        })
+        let writeContent = `${selectName}`
+        writeHosts(writeContent, true);
     }
 
 }

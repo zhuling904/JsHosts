@@ -78,7 +78,7 @@ async function readCurHosts() {
     await getCurHosts().then(res=>{
         hosts = res;
     });
-    console.log("✅ ~ zhuling hosts:", hosts);
+    console.log("✅ ~ zhuling hosts:", hosts)
     return hosts;
 }
 
