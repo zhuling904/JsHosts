@@ -18,6 +18,7 @@ async function checkWrPermission() {
                         return;
                     }
                     console.log('授权成功');
+                    inquirerCmd();
                 });
             }
             inquirerCmd();
