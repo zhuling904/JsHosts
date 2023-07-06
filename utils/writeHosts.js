@@ -24,7 +24,7 @@ async function writeHosts(content, isAppendFile = false) {
     } else {
         writeContent = `${curHosts}\n${COMMENT_START}\n${content}\n${COMMENT_END}\n`
     }
-    await fs.writeFile(HOSTS_PATH, writeContent ,(err) => {
+    fs.writeFile(HOSTS_PATH, writeContent ,(err) => {
         if (err) throw err;
         switchWifi();
     })

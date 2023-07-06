@@ -36,7 +36,7 @@ async function readDefaultHosts() {
     const defaultHostsList = await getDefaultHosts();
     // 处理数据
     const lines = defaultHostsList.trim().split("\n");
-    inquirer
+    await inquirer
         .prompt([
             {
                 type: 'checkbox',
@@ -61,7 +61,7 @@ async function readHostConfigDir() {
             {
                 type: 'checkbox',
                 name: 'selectName',
-                message: '预设hosts列表',
+                message: '配置文件列表',
                 pageSize: PAGESIZE,
                 choices: config_list
             },

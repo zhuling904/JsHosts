@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const { program } = require('commander');
 const { addHosts } = require('./addHosts');
 const { readHosts } = require('./readHosts');
+const { delHosts } = require('./delHosts');
 async function inquirerCmd() {
     program
         .version('0.0.1')
@@ -33,7 +34,7 @@ async function inquirerCmd() {
                         case '2.<增加>hosts配置':
                             addHosts(); break;
                         case '3.<删除>hosts配置':
-                            console.log('这是一个介绍3'); break;
+                            delHosts(); break;
                         case '4.<查看>hosts配置':
                             readHosts(); break;
                         case '5.<切换>hosts配置':
