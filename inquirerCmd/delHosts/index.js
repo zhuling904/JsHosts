@@ -4,6 +4,7 @@ const path = require('path');
 const { addToHosts } = require('../addConfigFile');
 const { getDefaultHosts } = require('../../utils/getDefaultHosts');
 const { getConfigList } = require('../../utils/getConfigList');
+const { writeHosts } = require('../../utils/writeHosts');
 const PAGESIZE = 99;
 async function delHosts() {
     inquirer
@@ -27,7 +28,7 @@ async function delHosts() {
                 case '2.删除配置文件':
                     delConfigFile(); break;
                 case '3.清除已添加的hosts配置':
-                    addToHosts(); break;
+                    clearConfig(); break;
             }
         }).catch((error) => {
             console.error('出错啦！', error);
@@ -89,6 +90,24 @@ async function delConfigFile() {
                     console.log('删除成功')
                 })
             })
+        }).catch((error) => {
+            console.error('出错啦！', error);
+        });
+}
+
+async function clearConfig() {
+    inquirer
+        .prompt([
+            {
+                type: 'confirm',
+                name: 'selectName',
+                message: '确认清除配置?',
+            },
+        ])
+        .then((answers) => {
+            const { selectName } = answers;
+            console.log("✅ ~ zhuling answers:", answers)
+            if(selectName) writeHosts(undefined, false, true);
         }).catch((error) => {
             console.error('出错啦！', error);
         });
