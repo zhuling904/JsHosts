@@ -1,15 +1,15 @@
 const inquirer = require('inquirer');
 const { program } = require('commander');
 const { addHosts } = require('./addHosts');
-const { readHosts } = require('./readHosts');
-const { delHosts } = require('./delHosts');
+const { readHosts, readHostConfigDir } = require('./readHosts');
+const { delHosts, clearConfig } = require('./delHosts');
 const { switchHostsFile } = require('./switchHostsFile');
 async function inquirerCmd() {
     program
-        .version('0.0.1')
+        .version('1.0.0', '-v,--version')
         .description('JsHosts切换hosts工具')
     program
-        .command('start')
+        .command('g')
         .description('JsHosts使用引导')
         .action(() => {
             inquirer
@@ -45,7 +45,30 @@ async function inquirerCmd() {
                     console.error('出错啦！', error);
                 });
         });
-
+    program
+        .command('s')
+        .description('切换hosts')
+        .action(() => {
+            switchHostsFile()
+        });
+    program
+        .command('c')
+        .description('清空配置')
+        .action(() => {
+            clearConfig()
+        });
+    program
+        .command('cl')
+        .description('查看配置文件列表')
+        .action(() => {
+            readHostConfigDir()
+        });
+    program
+        .command('add')
+        .description('增加hosts')
+        .action(() => {
+            addHosts()
+        });
     program.parse(process.argv);
 }
 

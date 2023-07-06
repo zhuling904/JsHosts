@@ -22,10 +22,8 @@ async function addConfigFile() {
 
 async function addToHosts() {
     const { selectName } = await getFileInfo(false);
-    console.log("✅ ~ zhuling selectName:", selectName);
     // 判断hosts中是否已经有该hosts了
     const curHosts = await readCurHosts();
-    console.log("✅ ~ zhuling curHosts:", curHosts)
     if (curHosts.includes(selectName)) {
         console.log('该hosts已在文件中，请勿重复添加');
         return;
@@ -39,7 +37,6 @@ async function addToHosts() {
 
 async function getFileInfo(needFileName = true) {
     const method = await choicesInputMethod(true);
-    console.log("✅ ~ zhuling method:", method)
     const defaultHostsList = await getDefaultHosts();
     // 处理数据
     const lines = defaultHostsList.trim().split("\n");
@@ -53,7 +50,6 @@ async function getFileInfo(needFileName = true) {
                 choices: method === 'checkbox' ? lines : undefined,
                 validate: method === 'checkbox' ? undefined : (val) => {
                     const lines = val.trim().split("\n");
-                    console.log("✅ ~ zhuling lines:", lines)
                     let flag = true;
                     lines.forEach(item => {
                         if (!item.match(regex)) {
@@ -73,9 +69,7 @@ async function getFileInfo(needFileName = true) {
         })
         selectName = selectNameStr
     }
-    console.log("✅ ~ zhuling selectName:", selectName)
     const fileName = needFileName && await getInputFileName();
-    console.log("✅ ~ zhuling fileName:", fileName)
     // 创建一个文件
     return {
         selectName,

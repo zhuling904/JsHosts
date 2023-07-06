@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const { getDefaultHosts } = require('../../utils/getDefaultHosts');
 const { getConfigList } = require('../../utils/getConfigList');
 const { getCurHosts } = require('../../utils/getCurHosts');
+const { editConfigFile } = require('../../utils/editConfig');
 const PAGESIZE = 99;
 async function readHosts() {
     inquirer
@@ -55,11 +56,10 @@ async function readDefaultHosts() {
 
 async function readHostConfigDir() {
     const config_list = await getConfigList();
-    console.log("✅ ~ zhuling config_list:", config_list)
     inquirer
         .prompt([
             {
-                type: 'checkbox',
+                type: 'list',
                 name: 'selectName',
                 message: '配置文件列表',
                 pageSize: PAGESIZE,
@@ -68,6 +68,7 @@ async function readHostConfigDir() {
         ])
         .then((answers) => {
             const { selectName } = answers;
+            editConfigFile(selectName);
         }).catch((error) => {
             console.error('出错啦！', error);
         });
@@ -78,10 +79,10 @@ async function readCurHosts() {
     await getCurHosts().then(res=>{
         hosts = res;
     });
-    console.log("✅ ~ zhuling hosts:", hosts)
     return hosts;
 }
 
 exports.readHosts = readHosts;
 exports.readCurHosts = readCurHosts;
 exports.readDefaultHosts = readDefaultHosts;
+exports.readHostConfigDir = readHostConfigDir;

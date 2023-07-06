@@ -13,7 +13,6 @@ async function choicesInputMethod(fromDefault = false) {
     const defaultHostsList = await getDefaultHosts();
     // 处理数据
     const lines = defaultHostsList.trim().split("\n");
-    console.log("✅ ~ zhuling lines:", lines)
     await inquirer
         .prompt([
             {

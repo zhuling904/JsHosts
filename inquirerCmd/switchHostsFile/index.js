@@ -5,7 +5,10 @@ const { writeHosts } = require("../../utils/writeHosts");
 const PAGESIZE = 99;
 async function switchHostsFile() {
     const config_list = await getConfigList();
-    console.log("✅ ~ zhuling config_list:", config_list)
+    if(config_list.length === 0) {
+        console.log('配置文件为空，请先添加配置文件'); 
+        return;
+    }
     inquirer
         .prompt([
             {
@@ -18,9 +21,7 @@ async function switchHostsFile() {
         ])
         .then(async (answers) => {
             const { selectName } = answers;
-            console.log("✅ ~ zhuling selectName:", selectName);
             const fileContent = await getConfileContent(selectName);
-            console.log("✅ ~ zhuling fileContent:", fileContent);
             writeHosts(fileContent, false, false);
         }).catch((error) => {
             console.error('出错啦！', error);

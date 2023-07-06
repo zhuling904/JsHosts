@@ -15,7 +15,6 @@ async function getConfileContent(fileName) {
     await readConfileContent(fileName).then(res=>{
         fileContent = res;
     });
-    console.log("✅ ~ zhuling fileContent:", fileContent)
     return fileContent;
 }
 

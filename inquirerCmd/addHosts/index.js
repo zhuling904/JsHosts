@@ -38,7 +38,6 @@ async function addHosts() {
  */
 async function addDefaultHosts() {
     const method = await choicesInputMethod();
-    console.log("✅ ~ zhuling method:", method)
     inquirer
         .prompt([
             {
@@ -47,7 +46,6 @@ async function addDefaultHosts() {
                 message: '请输入新增的预设:',
                 validate: (val) => {
                     const lines = val.trim().split("\n");
-                    console.log("✅ ~ zhuling lines:", lines)
                     let flag = true;
                     lines.forEach(item => {
                         if (!item.match(regex)) {
@@ -61,10 +59,8 @@ async function addDefaultHosts() {
         ])
         .then((answers) => {
             const { selectName } = answers;
-            console.log("✅ ~ zhuling selectName:\n", selectName)
             fs.appendFile(path.resolve(__dirname, '../../defaultHosts/hosts.txt'), `${selectName.trim()}\n`, (err, data) => {
                 if (err) throw err;
-                console.log("✅ ~ zhuling data:", data)
             })
         }).catch((error) => {
             console.error('出错啦！', error);

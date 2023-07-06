@@ -39,7 +39,6 @@ async function delDefaultHosts() {
     const defaultHostsList = await getDefaultHosts();
     // 处理数据
     let lines = defaultHostsList.trim().split("\n");
-    console.log("✅ ~ zhuling lines:", lines)
     await inquirer
         .prompt([
             {
@@ -54,12 +53,10 @@ async function delDefaultHosts() {
             const { selectName } = answers;
             // 删除选中项
             lines = lines.filter(item => !selectName.includes(item));
-            console.log("✅ ~ zhuling lines11111:", lines);
             let writeContent = '';
             lines.forEach(item => {
                 writeContent = writeContent + item + '\n';
             });
-            console.log("✅ ~ zhuling writeContent:", writeContent)
             fs.writeFile(path.resolve(__dirname, '../../defaultHosts/hosts.txt'), writeContent, (err) => {
                 if(err) throw err;
                 console.log('删除成功');
@@ -71,7 +68,6 @@ async function delDefaultHosts() {
 
 async function delConfigFile() {
     const config_list = await getConfigList();
-    console.log("✅ ~ zhuling config_list:", config_list)
     inquirer
         .prompt([
             {
@@ -106,7 +102,6 @@ async function clearConfig() {
         ])
         .then((answers) => {
             const { selectName } = answers;
-            console.log("✅ ~ zhuling answers:", answers)
             if(selectName) writeHosts(undefined, false, true);
         }).catch((error) => {
             console.error('出错啦！', error);
@@ -114,3 +109,4 @@ async function clearConfig() {
 }
 
 exports.delHosts = delHosts;
+exports.clearConfig = clearConfig;

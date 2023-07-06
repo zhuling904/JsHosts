@@ -5,11 +5,9 @@ const COMMENT_START = '#---ZHULING HOSTS START---';
 const COMMENT_END = '#---ZHULING HOSTS END---';
 const HOSTS_PATH = '/etc/hosts'
 async function writeHosts(content, isAppendFile = false, isClear = false) {
-    console.log("✅ ~ zhuling content:", content)
     // 先判断是否有预设注释
     const curHosts = await readCurHosts();
     let writeContent = '';
-    console.log("✅ ~ zhuling curHosts:", curHosts)
 
     // 已经添加过了，并且是追加hosts
     if (curHosts.includes(COMMENT_START)) {
