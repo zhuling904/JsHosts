@@ -1,8 +1,6 @@
 #!/usr/bin/env node
-const { inquirerCmd } = require('./inquirerCmd');
-
+const { checkWrPermission } = require('./utils/checkWrPermission');
 async function main() {
-    inquirerCmd()
+    checkWrPermission()
 }
-
 main()
