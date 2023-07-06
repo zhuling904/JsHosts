@@ -10,7 +10,7 @@ async function writeHosts(content, isAppendFile = false, isClear = false) {
           console.error('无法更改文件权限：', err);
           return;
         }
-        console.log('文件权限已成功更改。');
+        // console.log('文件权限已成功更改。');
     });
 
     // 先判断是否有预设注释
@@ -35,10 +35,13 @@ async function writeHosts(content, isAppendFile = false, isClear = false) {
     } else {
         writeContent = `${curHosts}\n${COMMENT_START}\n${content}\n${COMMENT_END}\n`
     }
-    fs.writeFile(HOSTS_PATH, writeContent, (err) => {
+    fs.writeFile(HOSTS_PATH, writeContent, async (err) => {
         if (err) throw err;
-        switchWifi();
+        await switchWifi();
     })
+    if(!content) {
+        await switchWifi();
+    }
 }
 
 exports.writeHosts = writeHosts;
