@@ -5,6 +5,14 @@ const COMMENT_START = '#---ZHULING HOSTS START---';
 const COMMENT_END = '#---ZHULING HOSTS END---';
 const HOSTS_PATH = '/etc/hosts'
 async function writeHosts(content, isAppendFile = false, isClear = false) {
+    fs.chmod('/etc/hosts', '777', (err) => {
+        if (err) {
+          console.error('无法更改文件权限：', err);
+          return;
+        }
+        console.log('文件权限已成功更改。');
+    });
+
     // 先判断是否有预设注释
     const curHosts = await readCurHosts();
     let writeContent = '';
