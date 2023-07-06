@@ -68,3 +68,6 @@ async function addDefaultHosts() {
 }
 
 exports.addHosts = addHosts;
+exports.addDefaultHosts = addDefaultHosts;
+exports.addConfigFile = addConfigFile;
+exports.addToHosts = addToHosts;

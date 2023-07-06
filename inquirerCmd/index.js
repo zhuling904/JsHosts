@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const { program } = require('commander');
-const { addHosts } = require('./addHosts');
-const { readHosts, readHostConfigDir } = require('./readHosts');
+const { addHosts, addDefaultHosts, addConfigFile, addToHosts } = require('./addHosts');
+const { readHosts, readHostConfigDir, readDefaultHosts, readCurHosts } = require('./readHosts');
 const { delHosts, clearConfig } = require('./delHosts');
 const { switchHostsFile } = require('./switchHostsFile');
 async function inquirerCmd() {
@@ -58,16 +58,40 @@ async function inquirerCmd() {
             clearConfig()
         });
     program
-        .command('cl')
+        .command('lp')
+        .description('查看预设hosts')
+        .action(() => {
+            readDefaultHosts()
+        });
+    program
+        .command('lc')
         .description('查看配置文件列表')
         .action(() => {
             readHostConfigDir()
         });
     program
-        .command('add')
-        .description('增加hosts')
+        .command('lh')
+        .description('查看当前hosts内容')
         .action(() => {
-            addHosts()
+            readCurHosts()
+        });
+    program
+        .command('ap')
+        .description('增加预设hosts')
+        .action(() => {
+            addDefaultHosts();
+        });
+    program
+        .command('ac')
+        .description('增加hosts配置文件')
+        .action(() => {
+            addConfigFile();
+        });
+    program
+        .command('ah')
+        .description('当前hosts中追加')
+        .action(() => {
+            addToHosts();
         });
     program.parse(process.argv);
 }
