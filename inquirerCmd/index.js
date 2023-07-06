@@ -3,6 +3,7 @@ const { program } = require('commander');
 const { addHosts } = require('./addHosts');
 const { readHosts } = require('./readHosts');
 const { delHosts } = require('./delHosts');
+const { switchHostsFile } = require('./switchHostsFile');
 async function inquirerCmd() {
     program
         .version('0.0.1')
@@ -38,7 +39,7 @@ async function inquirerCmd() {
                         case '4.<查看>hosts配置':
                             readHosts(); break;
                         case '5.<切换>hosts配置':
-                            console.log('这是一个介绍5'); break;
+                            switchHostsFile(); break;
                     }
                 }).catch((error) => {
                     console.error('出错啦！', error);
