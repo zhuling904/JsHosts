@@ -8,6 +8,6 @@
   "dependencies": {
     "commander": "^11.0.0",
     "inquirer": "^8.2.0",
-    "jshosts": "^1.0.0"
+    "jshosts": "^1.0.1"
   }
 }
