@@ -1,6 +1,13 @@
 {
+  "name": "jshosts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "jshosts": "index.js"
+  },
   "dependencies": {
     "commander": "^11.0.0",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "jshosts": "^1.0.0"
   }
 }
