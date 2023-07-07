@@ -5,7 +5,6 @@ const COMMENT_START = '#---JSHOSTS HOSTS START---';
 const COMMENT_END = '#---JSHOSTS HOSTS END---';
 const HOSTS_PATH = '/etc/hosts'
 async function writeHosts(content, isAppendFile = false, isClear = false) {
-    await chomodHosts();
     // 已经添加过了，并且是追加hosts
     // 先判断是否有预设注释
     const curHosts = await readCurHosts();
@@ -25,6 +24,10 @@ async function writeHosts(content, isAppendFile = false, isClear = false) {
             writeContent = `${top}\n${COMMENT_START}\n${content}\n${COMMENT_END}\n${bottom}\n`
         }
     } else {
+        if(isClear) {
+            console.log('还未添加过配置');
+            return;
+        }
         writeContent = `${curHosts}\n${COMMENT_START}\n${content}\n${COMMENT_END}\n`
     }
     fs.writeFile(HOSTS_PATH, writeContent, async (err) => {
