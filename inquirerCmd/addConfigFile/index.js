@@ -8,8 +8,8 @@ const { getInputFileName } = require('../getInputFileName');
 const { writeHosts } = require('../../utils/writeHosts');
 const regex = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+([a-zA-Z0-9.-]+)$/;
 const PAGESIZE = 99;
-const COMMENT_START = '#---ZHULING HOSTS START---';
-const COMMENT_END = '#---ZHULING HOSTS END---';
+const COMMENT_START = '#---JSHOSTS HOSTS START---';
+const COMMENT_END = '#---JSHOSTS HOSTS END---';
 /**
  * 增加预设hosts
  */

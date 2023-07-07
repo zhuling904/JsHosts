@@ -1,8 +1,8 @@
 const { readCurHosts } = require("../inquirerCmd/readHosts");
 const fs = require('fs');
 const { switchWifi } = require("./switchWifi");
-const COMMENT_START = '#---ZHULING HOSTS START---';
-const COMMENT_END = '#---ZHULING HOSTS END---';
+const COMMENT_START = '#---JSHOSTS HOSTS START---';
+const COMMENT_END = '#---JSHOSTS HOSTS END---';
 const HOSTS_PATH = '/etc/hosts'
 async function writeHosts(content, isAppendFile = false, isClear = false) {
     await chomodHosts();
