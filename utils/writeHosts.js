@@ -24,10 +24,6 @@ async function writeHosts(content, isAppendFile = false, isClear = false) {
             writeContent = `${top}\n${COMMENT_START}\n${content}\n${COMMENT_END}\n${bottom}\n`
         }
     } else {
-        if(isClear) {
-            console.log('还未添加过配置');
-            return;
-        }
         writeContent = `${curHosts}\n${COMMENT_START}\n${content}\n${COMMENT_END}\n`
     }
     fs.writeFile(HOSTS_PATH, writeContent, async (err) => {

@@ -5,7 +5,10 @@ const { addToHosts } = require('../addConfigFile');
 const { getDefaultHosts } = require('../../utils/getDefaultHosts');
 const { getConfigList } = require('../../utils/getConfigList');
 const { writeHosts } = require('../../utils/writeHosts');
+const { readCurHosts } = require('../readHosts');
 const PAGESIZE = 99;
+const COMMENT_START = '#---JSHOSTS HOSTS START---';
+const COMMENT_END = '#---JSHOSTS HOSTS END---';
 async function delHosts() {
     inquirer
         .prompt([
@@ -92,6 +95,11 @@ async function delConfigFile() {
 }
 
 async function clearConfig() {
+    const curHosts = await readCurHosts();
+    if (!curHosts.includes(COMMENT_START)) {
+        console.log('还未添加过配置');
+        return;
+    }
     inquirer
         .prompt([
             {
