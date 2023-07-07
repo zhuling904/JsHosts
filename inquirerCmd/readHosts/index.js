@@ -79,6 +79,8 @@ async function readCurHosts() {
     await getCurHosts().then(res=>{
         hosts = res;
     });
+    console.log("当前hosts:\n", hosts)
+
     return hosts;
 }
 
