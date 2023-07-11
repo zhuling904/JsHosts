@@ -4,6 +4,9 @@ const path = require('path');
 const { choicesInputMethod } = require('../../utils');
 const { addConfigFile, addToHosts } = require('../addConfigFile');
 const regex = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+([a-zA-Z0-9.-]+)$/;
+/**
+ * 增加hosts
+ */
 async function addHosts() {
     inquirer
         .prompt([

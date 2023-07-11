@@ -36,16 +36,4 @@ async function writeHosts(content, isAppendFile = false, isClear = false) {
     }
 }
 
-async function chomodHosts() {
-    return new Promise((resolve, reject) => {
-        fs.chmod('/etc/hosts', '777', async (err) => {
-            if (err) {
-              console.error('无法更改文件权限：', err);
-              reject(err)
-            }
-            resolve('文件权限已成功更改。')
-        });
-    })
-}
-
 exports.writeHosts = writeHosts;

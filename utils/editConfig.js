@@ -1,5 +1,9 @@
 const { spawn } = require('child_process');
 const path = require('path');
+/**
+ * 编辑配置文件
+ * @param {*} fileName 配置文件名
+ */
 function editConfigFile(fileName) {
     // 启动vim进程编辑文件
     const vim = spawn('vim', [path.resolve(__dirname, `../hosts_config/${fileName}`)], {

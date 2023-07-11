@@ -6,6 +6,9 @@ const { inquirerCmd } = require('jshosts/inquirerCmd');
 // 授权以将hosts改为当前用户可读写
 const command = 'chmod u+rw /etc/hosts';
 
+/**
+ * 检查是否有写入权限
+ */
 async function checkWrPermission() {
     fs.access(filePath, fs.constants.W_OK, async (err) => {
         if (err) {

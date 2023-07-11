@@ -8,10 +8,9 @@ const { getInputFileName } = require('../getInputFileName');
 const { writeHosts } = require('../../utils/writeHosts');
 const regex = /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+([a-zA-Z0-9.-]+)$/;
 const PAGESIZE = 99;
-const COMMENT_START = '#---JSHOSTS HOSTS START---';
-const COMMENT_END = '#---JSHOSTS HOSTS END---';
+
 /**
- * 增加预设hosts
+ * 增加配置文件
  */
 async function addConfigFile() {
     const { selectName, fileName } = await getFileInfo();
@@ -20,6 +19,9 @@ async function addConfigFile() {
     })
 }
 
+/**
+ * 追加到hosts中
+ */
 async function addToHosts() {
     const { selectName } = await getFileInfo(false);
     // 判断hosts中是否已经有该hosts了
@@ -35,6 +37,11 @@ async function addToHosts() {
 
 }
 
+/**
+ * 获取配置文件信息
+ * @param {*} needFileName 
+ * @returns 
+ */
 async function getFileInfo(needFileName = true) {
     const method = await choicesInputMethod(true);
     const defaultHostsList = await getDefaultHosts();
